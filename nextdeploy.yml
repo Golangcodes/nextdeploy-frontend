@@ -14,7 +14,7 @@ version: "1.0" # Config file versioning for forward compatibility with future Ne
 app:
   name: nextdeploy-frontend # [REQUIRED] Unique app name used for identification
   environment: production # [REQUIRED] production | staging | development
-  domain: nextdeploy.one # Public domain for your app
+  domain: app.example.com # Public domain for your app
   port: 3000 # [REQUIRED] Internal port your app listens on
 
 # -----
@@ -32,11 +32,11 @@ servers:
 # -----
 database:
   type: postgres # Supported: postgres | mysql
-  host: 3.92.56.22 # IP of your database server (managed or self-hosted)
+  host: 192.0.2.124 # IP of your database server (managed or self-hosted)
   port: 5432
-  username: postgres
-  password: "[PASSWORD]"
-  name: nextdeploy
+  username: dbuser
+  password: secret
+  name: exampledb
   migrate_on_deploy: true # Run database migrations automatically after deployment
 
 # Example:

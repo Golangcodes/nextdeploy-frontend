@@ -1,4 +1,4 @@
-import { Zap, Terminal, Server, Shield, Activity, Share2 } from "lucide-react";
+import { Zap, Terminal, Server, Shield, Activity, Share2, Lock, FileText } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { CodeBlock } from "@/components/copy-button";
 import GitHubStarButton from "@/components/github-star-button";
@@ -23,7 +23,7 @@ export default function DocsIndex() {
         <div className="text-amber-400 mt-0.5">⚠️</div>
         <div>
           <h4 className="text-amber-400 font-semibold mb-1">
-            Warning:Hobby Project
+            Warning: Hobby Project
           </h4>
           <p className="text-amber-200/70 text-sm">
             NextDeploy is currently a hobby project and is not intended for
@@ -43,60 +43,68 @@ export default function DocsIndex() {
         NextDeploy is a self-hosted deployment platform built exclusively for
         Next.js applications. Think of it as your own personal Vercel, but with:
       </p>
-      <ul className="space-y-2 mb-8 text-gray-300">
-        <li className="flex gap-3">
-          <span className="text-emerald-400">✓</span>
-          <span>
-            <strong>Full control</strong> - Deploy to any VPS you own
-          </span>
-        </li>
-        <li className="flex gap-3">
-          <span className="text-emerald-400">✓</span>
-          <span>
-            <strong>Native Execution</strong> - Run Next.js bare-metal, no
-            overhead
-          </span>
-        </li>
-        <li className="flex gap-3">
-          <span className="text-emerald-400">✓</span>
-          <span>
-            <strong>Zero lock-in</strong> - No vendor dependencies
-          </span>
-        </li>
-        <li className="flex gap-3">
-          <span className="text-emerald-400">✓</span>
-          <span>
-            <strong>Serverless Ready</strong> - Deploy natively to AWS Lambda/S3
-          </span>
-        </li>
-        <li className="flex gap-3">
-          <span className="text-emerald-400">✓</span>
-          <span>
-            <strong>Cost-effective</strong> - Pay only for your VPS
-            ($5-20/month)
-          </span>
-        </li>
-      </ul>
+      <div className="grid md:grid-cols-2 gap-4 mb-8 text-gray-300">
+        <ul className="space-y-2 list-none p-0 m-0">
+          <li className="flex gap-3">
+            <span className="text-emerald-400 font-bold">✓</span>
+            <span>
+              <strong>Full control</strong> - Deploy to any VPS you own
+            </span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-emerald-400 font-bold">✓</span>
+            <span>
+              <strong>Native Execution</strong> - Run Next.js bare-metal, no overhead
+            </span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-emerald-400 font-bold">✓</span>
+            <span>
+              <strong>Zero lock-in</strong> - No vendor dependencies
+            </span>
+          </li>
+        </ul>
+        <ul className="space-y-2 list-none p-0 m-0">
+          <li className="flex gap-3">
+            <span className="text-emerald-400 font-bold">✓</span>
+            <span>
+              <strong>Production Hardened</strong> - Fail2Ban & DDoS protection included
+            </span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-emerald-400 font-bold">✓</span>
+            <span>
+              <strong>Serverless Ready</strong> - AWS Lambda/S3 support
+            </span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-emerald-400 font-bold">✓</span>
+            <span>
+              <strong>Zero Downtime</strong> - Atomic port-swapping & rollbacks
+            </span>
+          </li>
+        </ul>
+      </div>
 
       <h3 className="text-2xl font-bold text-white mt-12 mb-4">
         Prerequisites
       </h3>
-      <ul className="space-y-2 mb-8 text-gray-300">
+      <ul className="space-y-2 mb-8 text-gray-300 list-none p-0">
         <li className="flex gap-3">
-          <span className="text-emerald-400">•</span>
+          <span className="text-emerald-400 font-bold">•</span>
           <span>
             <strong>A Next.js project</strong> (any version)
           </span>
         </li>
         <li className="flex gap-3">
-          <span className="text-emerald-400">•</span>
+          <span className="text-emerald-400 font-bold">•</span>
           <span>
             <strong>A Linux VPS</strong> (Ubuntu/Debian) or an{" "}
             <strong>AWS Account</strong>
           </span>
         </li>
         <li className="flex gap-3">
-          <span className="text-emerald-400">•</span>
+          <span className="text-emerald-400 font-bold">•</span>
           <span>
             <strong>SSH access</strong> to your server
           </span>
@@ -167,7 +175,7 @@ export default function DocsIndex() {
       <CodeBlock code="nextdeploy init" className="mb-8" />
       <p className="text-gray-300 mb-8">
         This scaffolds your project and generates a{" "}
-        <code className="bg-slate-900 px-2 py-1 rounded text-emerald-400">
+        <code className="bg-slate-900 px-2 py-1 rounded text-emerald-400 font-mono">
           nextdeploy.yml
         </code>{" "}
         config file.
@@ -178,7 +186,7 @@ export default function DocsIndex() {
       </h3>
       <p className="text-gray-300 mb-4">
         Edit{" "}
-        <code className="bg-slate-900 px-2 py-1 rounded text-emerald-400">
+        <code className="bg-slate-900 px-2 py-1 rounded text-emerald-400 font-mono">
           nextdeploy.yml
         </code>{" "}
         for your target environment:
@@ -200,20 +208,19 @@ export default function DocsIndex() {
         3. Server Preparation (VPS Only)
       </h3>
       <p className="text-gray-300 mb-4">
-        Automatically install dependencies and configure the background daemon.
+        Automatically install dependencies, configure the background daemon, and **harden your server** with Fail2Ban.
       </p>
       <CodeBlock code="nextdeploy prepare" className="mb-8" />
 
       <h3 className="text-xl font-semibold text-white mt-8 mb-3">
-        4. Deploy Manually
+        4. Build & Ship
       </h3>
       <p className="text-gray-300 mb-4">
-        Point it to your server/target and run:
+        Build your project locally and ship it to the world:
       </p>
       <CodeBlock code={`nextdeploy build\nnextdeploy ship`} className="mb-8" />
       <p className="text-gray-300 mb-8">
-        The CLI analyzes your Route Plan and executes a Zero-Downtime port swap
-        (VPS) or S3 static synchronization (AWS).
+        The CLI analyzes your code, performs an **Atomic Swap** (Zero-Downtime), and automatically configures **DDoS protection** and **Security Headers** in Caddy.
       </p>
 
       <hr className="border-slate-800 my-10" />
@@ -304,7 +311,7 @@ export default function DocsIndex() {
             fontSize="12"
             fontWeight="600"
           >
-            SSH Tunnel (SFTP)
+            Encrypted SFTP
           </text>
 
           {/* Production VPS */}
@@ -327,7 +334,7 @@ export default function DocsIndex() {
             fontSize="14"
             fontWeight="600"
           >
-            Production VPS
+            Production VPS (Hardened)
           </text>
 
           {/* Daemon */}
@@ -405,7 +412,7 @@ export default function DocsIndex() {
             markerEnd="url(#arrowhead-small)"
           />
           <text x="470" y="260" textAnchor="start" fill="#94a3b8" fontSize="10">
-            Manages
+            Supervises
           </text>
 
           <path
@@ -416,7 +423,7 @@ export default function DocsIndex() {
             markerEnd="url(#arrowhead-small)"
           />
           <text x="470" y="130" textAnchor="start" fill="#94a3b8" fontSize="10">
-            Configures
+            Hardens
           </text>
 
           <path
@@ -426,7 +433,7 @@ export default function DocsIndex() {
             markerEnd="url(#arrowhead-small)"
           />
           <text x="650" y="200" textAnchor="start" fill="#8b5cf6" fontSize="12">
-            Proxies HTTP
+            HTTPS Proxy
           </text>
 
           {/* Arrowheads */}
@@ -458,49 +465,49 @@ export default function DocsIndex() {
       <h3 className="text-2xl font-bold text-white mt-12 mb-4">
         The Lifecycle of a Deployment
       </h3>
-      <div className="space-y-6 mb-12">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         {[
           {
             icon: Terminal,
             title: "Local Build",
-            desc: "The CLI runs your custom build command and collects the output.",
+            desc: "The CLI runs your custom build command natively for your target architecture.",
           },
           {
             icon: Zap,
-            title: "Artifact Packaging",
-            desc: "A compressed tarball is created containing compiled server code, static assets, and metadata.",
+            title: "Packaging",
+            desc: "A production artifact is bundled with server-code, assets, and deployment metadata.",
           },
           {
             icon: Share2,
             title: "Transport",
-            desc: "The tarball is securely uploaded to the VPS over an encrypted SSH connection (SFTP).",
-          },
-          {
-            icon: Activity,
-            title: "Daemon Trigger",
-            desc: "The CLI communicates with the NextDeploy Daemon via a root-protected Unix socket.",
+            desc: "The payload is transmitted securely to your VPS via encrypted SFTP channels.",
           },
           {
             icon: Shield,
-            title: "Atomic Swap",
-            desc: "The Daemon unpacks the release, allocates a fresh port, and injects secrets.",
+            title: "Production Hardening",
+            desc: "Fail2Ban and global DDoS filters are automatically applied to protect your endpoint.",
           },
           {
-            icon: Server,
-            title: "Health Check & Reload",
-            desc: "Once the app responds, the Daemon updates Caddy and reloads the proxy without dropping traffic.",
+            icon: Lock,
+            title: "Secure Swap",
+            desc: "A fresh port is allocated, secrets are injected, and a healthy port-swap occurs.",
+          },
+          {
+            icon: FileText,
+            title: "JSON Logging",
+            desc: "Professional access logs are recorded for real-time traffic analysis and auditing.",
           },
         ].map((step, i) => (
           <div
             key={i}
-            className="flex gap-4 p-4 bg-slate-900/30 border border-slate-800 rounded-xl"
+            className="flex flex-col gap-3 p-5 bg-slate-900/30 border border-slate-800 rounded-xl hover:border-emerald-500/30 transition-colors"
           >
-            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-              <step.icon className="w-5 h-5 text-emerald-400" />
+            <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+              <step.icon className="w-6 h-6 text-emerald-400" />
             </div>
             <div>
-              <h4 className="text-white font-semibold mb-1">{step.title}</h4>
-              <p className="text-gray-400 text-sm">{step.desc}</p>
+              <h4 className="text-white font-semibold mb-1 text-base">{step.title}</h4>
+              <p className="text-gray-400 text-sm leading-relaxed">{step.desc}</p>
             </div>
           </div>
         ))}
@@ -509,31 +516,43 @@ export default function DocsIndex() {
       <h3 className="text-2xl font-bold text-white mt-12 mb-4">
         Component Responsibility
       </h3>
-      <div className="grid md:grid-cols-2 gap-6 my-8">
+      <div className="grid md:grid-cols-3 gap-6 my-8">
         <div className="p-6 bg-slate-900/40 border border-slate-800 rounded-2xl">
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2 m-0 font-sans">
             <Terminal className="w-5 h-5 text-emerald-400" />
             The CLI (Go)
           </h3>
-          <ul className="space-y-2 text-sm text-gray-400">
-            <li>
-              • State management in{" "}
-              <code className="bg-black/40 px-1 rounded">.nextdeploy/</code>
-            </li>
-            <li>• Automatic project & package manager discovery</li>
-            <li>• Encrypted secret handling & SSH authentication</li>
+          <ul className="space-y-2 text-sm text-gray-400 list-none p-0">
+            <li>• Local state management</li>
+            <li>• Package manager discovery</li>
+            <li>• Encrypted secret handling</li>
+            <li>• SFTP Transport</li>
           </ul>
         </div>
 
         <div className="p-6 bg-slate-900/40 border border-slate-800 rounded-2xl">
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2 m-0 font-sans">
             <Server className="w-5 h-5 text-blue-400" />
             The Daemon (Go)
           </h3>
-          <ul className="space-y-2 text-sm text-gray-400">
-            <li>• Root-isolated process supervision via systemd</li>
-            <li>• Unix socket server for secure local control</li>
-            <li>• Automated health monitoring & release pruning</li>
+          <ul className="space-y-2 text-sm text-gray-400 list-none p-0">
+            <li>• Systemd task supervision</li>
+            <li>• Unix socket control</li>
+            <li>• Health monitoring</li>
+            <li>• Release pruning</li>
+          </ul>
+        </div>
+
+        <div className="p-6 bg-slate-900/40 border border-slate-800 rounded-2xl border-purple-500/20 shadow-lg shadow-purple-500/5">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2 m-0 font-sans">
+            <Lock className="w-5 h-5 text-purple-400" />
+            The Shield
+          </h3>
+          <ul className="space-y-2 text-sm text-gray-400 list-none p-0">
+            <li>• Fail2Ban IP Jailing</li>
+            <li>• Caddy security headers</li>
+            <li>• Global DDoS connection limits</li>
+            <li>• CSP & HSTS enforcement</li>
           </ul>
         </div>
       </div>
