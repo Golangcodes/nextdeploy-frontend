@@ -61,7 +61,7 @@ export default function Hero() {
         <h1 className="text-3xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-emerald-100 via-green-200 to-emerald-100 bg-clip-text text-transparent leading-tight text-center">
           Next.js Deployment
           <br />
-          Without the Black Box.
+          Without the Black Box
         </h1>
 
         {/* Tagline - more compact */}
