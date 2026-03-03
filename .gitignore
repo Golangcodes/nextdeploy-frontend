@@ -2,7 +2,7 @@
 .nextdeploy/
 # dependencies
 /node_modules
-
+nextdeploy.yml
 # next.js
 /.next/
 /out/
@@ -26,6 +26,3 @@ app.tar.gz
 *.tsbuildinfo
 next-env.d.ts
 
-# deployment guides (environment-specific)
-DEPLOYMENT_GCP.md
-QUICKSTART.md
