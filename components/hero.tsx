@@ -96,7 +96,7 @@ export default function Hero() {
             <div className="relative aspect-video bg-slate-900">
               <iframe
                 className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/MMtvGA1YhW4?si=2rC5CpxfZ9lK6ptF"
+                src="https://www.youtube.com/embed/Ms1Lym3jiJ0?si=2rC5CpxfZ9lK6ptF"
                 title="NextDeploy Demo"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -152,11 +152,10 @@ export default function Hero() {
                   <button
                     key={option.id}
                     onClick={() => setActiveTab(option)}
-                    className={`flex items-center gap-2 px-5 py-3 text-xs font-medium transition-colors border-b-2 whitespace-nowrap ${
-                      isActive
+                    className={`flex items-center gap-2 px-5 py-3 text-xs font-medium transition-colors border-b-2 whitespace-nowrap ${isActive
                         ? "text-emerald-400 border-emerald-500 bg-slate-800/50"
                         : "text-gray-400 border-transparent hover:text-gray-200 hover:bg-slate-800/30"
-                    }`}
+                      }`}
                   >
                     <Icon className="w-3.5 h-3.5" />
                     {option.name}
