@@ -1,8 +1,4 @@
-import {
-  Zap, Terminal, Server, Shield, Share2, Lock, FileText, Cloud,
-  Key, GitBranch, RefreshCw, Package, Cpu, Globe, CheckCircle2,
-  ArrowRight, Database, Layers, Gauge
-} from "lucide-react";
+import { Zap, Terminal, Server, Shield, Activity, Share2, Lock, FileText, Cloud, Key, GitBranch, RefreshCw } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { CodeBlock } from "@/components/copy-button";
 import GitHubStarButton from "@/components/github-star-button";
@@ -10,97 +6,60 @@ import GitHubStarButton from "@/components/github-star-button";
 export default function DocsIndex() {
   return (
     <div className="py-12 prose prose-invert max-w-none">
-
-      {/* ─── HERO ─── */}
-      <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
-        <div>
-          <div className="flex flex-wrap items-center gap-2 mb-4">
-            <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 tracking-wide">v0.1.x Early Access</span>
-            <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-purple-500/15 text-purple-400 border border-purple-500/25">MIT License</span>
-            <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-500/15 text-blue-400 border border-blue-500/25">Open Source</span>
-          </div>
-          <h1 className="text-5xl font-black text-white m-0 leading-tight tracking-tight">
-            NextDeploy <span className="text-emerald-400">Docs</span>
-          </h1>
-          <p className="text-gray-300 text-xl mt-4 mb-0 max-w-2xl leading-relaxed">
-            The self-hosted deployment engine that gives you <strong className="text-white">Vercel-grade power</strong> on infrastructure you own. One CLI. Two targets. Zero vendor lock-in.
-          </p>
-        </div>
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <h1 className="text-4xl font-bold text-white m-0">
+          NextDeploy Documentation
+        </h1>
         <GitHubStarButton />
       </div>
 
-      {/* ─── STAT PILLS ─── */}
-      <div className="flex flex-wrap gap-4 mb-10">
-        {[
-          { icon: Zap, label: "Single command deploy", color: "text-emerald-400" },
-          { icon: Globe, label: "Custom domains + free SSL", color: "text-blue-400" },
-          { icon: RefreshCw, label: "One-command rollback", color: "text-amber-400" },
-          { icon: Lock, label: "Secrets never in artifacts", color: "text-purple-400" },
-          { icon: Gauge, label: "Zero-downtime atomic swap", color: "text-rose-400" },
-        ].map(({ icon: Icon, label, color }) => (
-          <div key={label} className={`flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/60 border border-slate-700 text-sm ${color}`}>
-            <Icon className="w-4 h-4" />
-            <span className="text-gray-200">{label}</span>
-          </div>
-        ))}
-      </div>
+      <p className="text-gray-300 text-lg mb-8">
+        NextDeploy is your self-hosted deployment engine for Next.js — deploy to
+        your own VPS or to AWS serverless infrastructure with a single command.
+        No vendor lock-in, no monthly platform fees.
+      </p>
 
-      {/* ─── WHAT CAN IT DO ─── */}
-      <div className="grid md:grid-cols-2 gap-5 mb-10">
-        <div className="relative p-6 bg-gradient-to-br from-blue-900/20 to-slate-900/50 border border-blue-500/20 rounded-2xl overflow-hidden group hover:border-blue-400/40 transition-all">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-          <Server className="w-8 h-8 text-blue-400 mb-3" />
-          <h3 className="text-white font-bold text-xl mb-2 m-0">VPS Deployment</h3>
-          <p className="text-gray-400 text-sm leading-relaxed mb-4 m-0">
-            Ship to any Linux server you own. Automatic Caddy config, Fail2Ban hardening, HSTS, CSP, zero-downtime atomic port swaps, and a full release history with one-command rollback.
-          </p>
-          <ul className="space-y-1.5 text-sm text-gray-400 list-none p-0 m-0">
-            <li className="flex items-center gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" /> Systemd service supervision via Daemon</li>
-            <li className="flex items-center gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" /> Caddy auto-HTTPS &amp; reverse proxy</li>
-            <li className="flex items-center gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" /> Atomic hot-swap with health check guard</li>
-            <li className="flex items-center gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" /> Release history — instant rollback</li>
-            <li className="flex items-center gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" /> Fail2Ban + DDoS rate-limiting out of the box</li>
-          </ul>
-        </div>
-
-        <div className="relative p-6 bg-gradient-to-br from-purple-900/20 to-slate-900/50 border border-purple-500/20 rounded-2xl overflow-hidden group hover:border-purple-400/40 transition-all">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-          <Cloud className="w-8 h-8 text-purple-400 mb-3" />
-          <h3 className="text-white font-bold text-xl mb-2 m-0">AWS Serverless</h3>
-          <p className="text-gray-400 text-sm leading-relaxed mb-4 m-0">
-            No servers to manage. NextDeploy orchestrates Lambda, S3, CloudFront, ACM, and Secrets Manager for you. Add your domain — it handles SSL, DNS instructions, and CDN setup automatically.
-          </p>
-          <ul className="space-y-1.5 text-sm text-gray-400 list-none p-0 m-0">
-            <li className="flex items-center gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-purple-400 flex-shrink-0" /> Lambda compute with Bridge Adapter</li>
-            <li className="flex items-center gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-purple-400 flex-shrink-0" /> S3 static assets with proper cache headers</li>
-            <li className="flex items-center gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-purple-400 flex-shrink-0" /> CloudFront CDN + OAC origin security</li>
-            <li className="flex items-center gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-purple-400 flex-shrink-0" /> Free SSL via ACM + <code className="text-purple-300 bg-slate-800 px-1 rounded text-xs">dns.txt</code> DNS guide</li>
-            <li className="flex items-center gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-purple-400 flex-shrink-0" /> AWS Secrets Manager + Lambda Extension injection</li>
-          </ul>
-        </div>
-      </div>
-
-      {/* ─── PRE-REQUISITES NOTE ─── */}
-      <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-10 flex gap-3">
-        <div className="text-amber-400 mt-0.5 flex-shrink-0">⚠️</div>
+      <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-8 flex gap-3">
+        <div className="text-amber-400 mt-0.5">⚠️</div>
         <div>
-          <h4 className="text-amber-400 font-semibold mb-1">Early Access — v0.1.x</h4>
-          <p className="text-amber-200/70 text-sm m-0">
-            Production-ready for personal and small-team projects. APIs may evolve between minor versions. Always back up secrets and review the changelog before upgrading. Use <code>nextdeploy update</code> to get the latest binary instantly.
+          <h4 className="text-amber-400 font-semibold mb-1">
+            Early Access — v0.1.x
+          </h4>
+          <p className="text-amber-200/70 text-sm">
+            NextDeploy is production-ready for personal and small-team projects.
+            APIs may evolve between minor versions. Always back up secrets and review changelogs before upgrading.
           </p>
         </div>
       </div>
 
       <hr className="border-slate-800 my-10" />
 
-      {/* ─── INSTALLATION ─── */}
-      <h2 className="text-3xl font-bold text-white mb-2">Installation</h2>
-      <p className="text-gray-400 mb-8 text-base">One command to install. Self-updates automatically.</p>
+      {/* ─── WHAT IS NEXTDEPLOY ─── */}
+      <h2 className="text-3xl font-bold text-white mb-6">What is NextDeploy?</h2>
+      <p className="text-gray-300 mb-4">
+        NextDeploy gives you the full power of a Vercel-grade deployment engine
+        on infrastructure you own and control:
+      </p>
+      <div className="grid md:grid-cols-2 gap-4 mb-8 text-gray-300">
+        <ul className="space-y-2 list-none p-0 m-0">
+          <li className="flex gap-3"><span className="text-emerald-400 font-bold">✓</span><span><strong>VPS Deployments</strong> — atomic swap, zero-downtime, Caddy proxy</span></li>
+          <li className="flex gap-3"><span className="text-emerald-400 font-bold">✓</span><span><strong>AWS Serverless</strong> — S3 + Lambda + CloudFront, one command</span></li>
+          <li className="flex gap-3"><span className="text-emerald-400 font-bold">✓</span><span><strong>Secret Management</strong> — encrypted at-rest, AWS Secrets Manager in cloud</span></li>
+        </ul>
+        <ul className="space-y-2 list-none p-0 m-0">
+          <li className="flex gap-3"><span className="text-emerald-400 font-bold">✓</span><span><strong>Production-Hardened</strong> — Fail2Ban, DDoS limits, HSTS, CSP auto-generated</span></li>
+          <li className="flex gap-3"><span className="text-emerald-400 font-bold">✓</span><span><strong>Zero Lock-in</strong> — your infra, your config, open-source MIT license</span></li>
+          <li className="flex gap-3"><span className="text-emerald-400 font-bold">✓</span><span><strong>Rollbacks</strong> — instant one-command rollback to any previous release</span></li>
+        </ul>
+      </div>
 
-      <h3 className="text-xl font-semibold text-white mt-8 mb-3 flex items-center gap-2">
-        <Terminal className="w-5 h-5 text-emerald-400" /> CLI — Your Local Machine
-      </h3>
-      <p className="text-gray-300 mb-4">The <code className="bg-slate-900 px-2 py-1 rounded text-emerald-400 font-mono">nextdeploy</code> CLI is the only tool you need on your machine. A single static binary, no dependencies.</p>
+      <hr className="border-slate-800 my-10" />
+
+      {/* ─── INSTALLATION ─── */}
+      <h2 className="text-3xl font-bold text-white mb-6">Installation</h2>
+
+      <h3 className="text-xl font-semibold text-white mt-8 mb-3">CLI (Your Local Machine)</h3>
+      <p className="text-gray-300 mb-4">Install the NextDeploy toolbelt using our global installer:</p>
       <Tabs defaultValue="linux" className="w-full mb-8">
         <TabsList className="bg-slate-900 border border-slate-700">
           <TabsTrigger value="linux">Linux / macOS</TabsTrigger>
@@ -118,11 +77,10 @@ export default function DocsIndex() {
         </TabsContent>
       </Tabs>
 
-      <h3 className="text-xl font-semibold text-white mt-8 mb-3 flex items-center gap-2">
-        <Server className="w-5 h-5 text-blue-400" /> Daemon — VPS Only
-      </h3>
+      <h3 className="text-xl font-semibold text-white mt-8 mb-3">Daemon (VPS Only)</h3>
       <p className="text-gray-300 mb-4">
-        The daemon (<code className="bg-slate-900 px-2 py-1 rounded text-blue-400 font-mono">nextdeployd</code>) runs on your Linux server as a systemd service. It handles health checks, atomic swaps, release management, and secret hot-reloading. <em className="text-gray-500">Not needed for Serverless.</em>
+        The daemon runs on your Linux server and manages deployments, health checks, and process supervision.
+        <em> Only needed for VPS target — not required for serverless.</em>
       </p>
       <Tabs defaultValue="script" className="w-full mb-8">
         <TabsList className="bg-slate-900 border border-slate-700">
@@ -140,306 +98,174 @@ export default function DocsIndex() {
       <hr className="border-slate-800 my-10" />
 
       {/* ─── VPS DEPLOYMENT ─── */}
-      <div className="flex items-center gap-3 mb-2">
-        <div className="p-2 rounded-xl bg-blue-500/10 border border-blue-500/20">
-          <Server className="w-6 h-6 text-blue-400" />
-        </div>
-        <h2 className="text-3xl font-bold text-white m-0">VPS Deployment</h2>
-      </div>
-      <p className="text-gray-400 mb-8 text-base">
-        Deploy to any Linux server you own or rent. Production-hardened out of the box — zero extra configuration for HTTPS, security headers, or process supervision.
+      <h2 className="text-3xl font-bold text-white mb-2">VPS Deployment</h2>
+      <p className="text-gray-400 mb-6 text-sm">Deploy Next.js to any Linux server you own or rent.</p>
+
+      <h3 className="text-xl font-semibold text-white mt-8 mb-3">1. Initialize Your Project</h3>
+      <CodeBlock code="nextdeploy init" className="mb-4" />
+      <p className="text-gray-300 mb-6">
+        Generates a <code className="bg-slate-900 px-2 py-1 rounded text-emerald-400 font-mono">nextdeploy.yml</code> file with sensible defaults for your project.
       </p>
 
-      <h3 className="text-xl font-semibold text-white mt-8 mb-3">1. Initialize</h3>
-      <CodeBlock code="nextdeploy init" className="mb-3" />
-      <p className="text-gray-400 text-sm mb-8">
-        Creates a <code className="bg-slate-900 px-1.5 py-0.5 rounded text-emerald-400 font-mono text-xs">nextdeploy.yml</code> in your project root with sensible defaults.
-      </p>
-
-      <h3 className="text-xl font-semibold text-white mt-8 mb-3">2. Configure</h3>
+      <h3 className="text-xl font-semibold text-white mt-8 mb-3">2. Configure for VPS</h3>
       <CodeBlock
         code={`version: "1.0"
 target_type: vps
 
 app:
-  name: my-app
-  domain: app.example.com  # Caddy gets HTTPS automatically
+  name: my-next-app
+  domain: app.example.com
   port: 3000
+  environment: production
 
 servers:
-  - name: prod
-    host: 1.2.3.4
+  - name: production-01
+    host: 192.168.1.100
     port: 22
     username: deploy
-    ssh_key: ~/.ssh/id_rsa
-
-secrets:
-  provider: local  # Encrypted on-disk, injected at runtime`}
+    ssh_key: ~/.ssh/id_rsa`}
         className="mb-8"
       />
 
-      <h3 className="text-xl font-semibold text-white mt-8 mb-3">3. Prepare Your Server <span className="text-gray-500 font-normal text-sm">(once)</span></h3>
-      <p className="text-gray-400 text-sm mb-3">Runs an Ansible playbook that installs and configures everything: Node/Bun runtime, Caddy, Fail2Ban, and the NextDeploy daemon.</p>
+      <h3 className="text-xl font-semibold text-white mt-8 mb-3">3. Prepare the Server</h3>
+      <p className="text-gray-300 mb-4">
+        One-time setup: installs Bun, Caddy, Fail2Ban, and the NextDeploy daemon on your server.
+      </p>
       <CodeBlock code="nextdeploy prepare" className="mb-8" />
 
       <h3 className="text-xl font-semibold text-white mt-8 mb-3">4. Build &amp; Ship</h3>
       <CodeBlock code={`nextdeploy build\nnextdeploy ship`} className="mb-4" />
-      <div className="grid sm:grid-cols-3 gap-3 mb-8">
-        {[
-          { icon: Package, label: "Build", desc: "Standalone Next.js output + artifact packaging" },
-          { icon: Share2, label: "Ship", desc: "SFTP upload → Daemon swap → Health verified → Live" },
-          { icon: RefreshCw, label: "Rollback", desc: "Atomic revert to any previous release — instant" },
-        ].map(({ icon: Icon, label, desc }) => (
-          <div key={label} className="p-4 bg-slate-900/30 border border-slate-800 rounded-xl">
-            <Icon className="w-5 h-5 text-emerald-400 mb-2" />
-            <p className="text-white font-semibold text-sm mb-1 m-0">{label}</p>
-            <p className="text-gray-500 text-xs m-0 leading-relaxed">{desc}</p>
-          </div>
-        ))}
-      </div>
+      <p className="text-gray-300 mb-8">
+        The CLI builds locally, packages a <code className="bg-slate-900 px-2 py-1 rounded text-emerald-400 font-mono">.nextdeploy/app.tar.gz</code> artifact,
+        uploads it via SFTP, and signals the daemon to perform an atomic port-swap with health checking.
+      </p>
 
-      <h3 className="text-xl font-semibold text-white mt-8 mb-3">Instant Rollback</h3>
-      <CodeBlock code="nextdeploy rollback" className="mb-4" />
-      <p className="text-gray-400 text-sm mb-8">Reverts to the previous release in seconds. The Daemon keeps your last 5 releases in a ring buffer — no manual backups needed.</p>
+      <h3 className="text-xl font-semibold text-white mt-8 mb-3">Rollback</h3>
+      <p className="text-gray-300 mb-4">Instantly roll back to the previous release:</p>
+      <CodeBlock code="nextdeploy rollback" className="mb-8" />
 
       <hr className="border-slate-800 my-10" />
 
       {/* ─── SERVERLESS DEPLOYMENT ─── */}
-      <div className="flex items-center gap-3 mb-2">
-        <div className="p-2 rounded-xl bg-purple-500/10 border border-purple-500/20">
-          <Cloud className="w-6 h-6 text-purple-400" />
-        </div>
-        <h2 className="text-3xl font-bold text-white m-0">Cloud Deployment — AWS Serverless</h2>
-      </div>
-      <p className="text-gray-400 mb-6 text-base">
-        No daemons. No servers. NextDeploy orchestrates your entire AWS stack — Lambda, S3, CloudFront, ACM certificates, and Secrets Manager — with a single <code className="text-purple-300 bg-slate-800 px-1.5 py-0.5 rounded text-xs font-mono">nextdeploy ship</code>.
+      <h2 className="text-3xl font-bold text-white mb-2">Serverless Deployment (AWS)</h2>
+      <p className="text-gray-400 mb-6 text-sm">
+        No VPS, no daemon — deploy directly to AWS Lambda + S3 + CloudFront.
       </p>
 
-      <div className="grid sm:grid-cols-2 gap-4 mb-8">
-        <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-5 flex gap-3">
-          <Globe className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
-          <div>
-            <h4 className="text-emerald-400 font-semibold mb-1 text-sm">Automatic Custom Domains</h4>
-            <p className="text-emerald-200/60 text-sm m-0 leading-relaxed">
-              Add your domain to the config. NextDeploy requests an ACM certificate, sets up CloudFront, and writes a <code className="text-emerald-300">dns.txt</code> in your project directory with the exact DNS records to add.
-            </p>
-          </div>
-        </div>
-        <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-5 flex gap-3">
-          <Lock className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
-          <div>
-            <h4 className="text-blue-400 font-semibold mb-1 text-sm">Zero-Trust Secret Injection</h4>
-            <p className="text-blue-200/60 text-sm m-0 leading-relaxed">
-              Secrets live in AWS Secrets Manager. Lambda fetches them at cold-start via the AWS Secrets Extension — no SDK code needed in your app. Just <code className="text-blue-300">process.env</code>.
-            </p>
-          </div>
+      <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mb-8 flex gap-3">
+        <div className="text-blue-400 mt-0.5">ℹ️</div>
+        <div>
+          <h4 className="text-blue-400 font-semibold mb-1">Prerequisites</h4>
+          <ul className="text-blue-200/70 text-sm space-y-1 list-none p-0 m-0">
+            <li>• AWS CLI credentials configured (<code>~/.aws/credentials</code> or environment variables)</li>
+            <li>• An S3 bucket for static assets</li>
+            <li>• A Lambda function created (NextDeploy updates the code — it does not create the function)</li>
+            <li>• A CloudFront distribution pointed at your S3 bucket + Lambda URL (optional but recommended)</li>
+            <li>• <code>output: &apos;standalone&apos;</code> set in your <code>next.config.mjs</code></li>
+          </ul>
         </div>
       </div>
 
-      <h3 className="text-xl font-semibold text-white mt-8 mb-3">Configure</h3>
+      <h3 className="text-xl font-semibold text-white mt-8 mb-3">1. Configure for Serverless</h3>
       <CodeBlock
         code={`version: "1.0"
 target_type: serverless
 
 app:
-  name: my-app
-  domain: my-app.com     # NextDeploy handles SSL + CloudFront automatically
+  name: my-next-app
+  domain: app.example.com
+  port: 3000
 
 serverless:
   provider: aws
-  region: us-east-1      # ACM certs MUST be us-east-1 for CloudFront`}
+  region: us-east-1
+  s3_bucket: my-nextjs-static-assets        # public/ and _next/static/ land here
+  cloudfront_id: EXXXXXXXXXXXXXXXXX          # optional: triggers cache invalidation
+  lambda_function_name: my-next-app-handler  # optional: defaults to app.name`}
         className="mb-8"
       />
 
-      <h3 className="text-xl font-semibold text-white mt-8 mb-3">Build &amp; Ship</h3>
-      <CodeBlock code={`nextdeploy build\nnextdeploy ship`} className="mb-4" />
+      <h3 className="text-xl font-semibold text-white mt-8 mb-3">2. Add <code className="text-emerald-400">output: &apos;standalone&apos;</code> to Next.js</h3>
+      <CodeBlock
+        code={`// next.config.mjs
+const nextConfig = {
+  output: 'standalone',
+}
+export default nextConfig`}
+        className="mb-8"
+      />
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+      <h3 className="text-xl font-semibold text-white mt-8 mb-3">3. Build &amp; Ship</h3>
+      <CodeBlock code={`nextdeploy build\nnextdeploy ship`} className="mb-4" />
+      <p className="text-gray-300 mb-6">Behind the scenes, <code className="bg-slate-900 px-2 py-1 rounded text-emerald-400 font-mono">ship</code> performs these steps automatically:</p>
+
+      <div className="grid md:grid-cols-2 gap-4 mb-8">
         {[
-          { step: "1", icon: Package, title: "Build artifact", desc: "nextdeploy build creates .nextdeploy/app.tar.gz" },
-          { step: "2", icon: Lock, title: "Push secrets", desc: "Local secrets synced to AWS Secrets Manager — never in the artifact" },
-          { step: "3", icon: Database, title: "Upload to S3", desc: "Static assets with cache headers and correct MIME types" },
-          { step: "4", icon: Cpu, title: "Deploy Lambda", desc: "Standalone build zipped and pushed via UpdateFunctionCode" },
-          { step: "5", icon: Globe, title: "SSL + DNS guide", desc: "ACM cert requested, dns.txt written with your CNAME records" },
-          { step: "6", icon: Zap, title: "Invalidate CDN", desc: "CloudFront /* invalidated so users get fresh assets immediately" },
-        ].map(({ step, icon: Icon, title, desc }) => (
-          <div key={step} className="flex gap-3 p-4 bg-slate-900/30 border border-slate-800 rounded-xl">
-            <span className="flex-shrink-0 w-7 h-7 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-xs">{step}</span>
+          { step: "1", title: "Discover Artifact", desc: "Finds your .nextdeploy/app.tar.gz built by nextdeploy build" },
+          { step: "2", title: "Push Secrets", desc: "Reads local SecretManager and pushes secrets to AWS Secrets Manager — never inside the artifact" },
+          { step: "3", title: "Upload Static Assets", desc: "Uploads public/ and _next/static/ to S3 with correct MIME types and Cache-Control headers" },
+          { step: "4", title: "Deploy Lambda", desc: "Zips .next/standalone/ and pushes it to your Lambda function via UpdateFunctionCode" },
+          { step: "5", title: "Inject Secret ARN", desc: "Sets ND_SECRETS_ARN in Lambda env vars — your app fetches them at runtime via IAM" },
+          { step: "6", title: "Invalidate CDN", desc: "Triggers a CloudFront /* invalidation so users instantly get fresh assets" },
+        ].map(({ step, title, desc }) => (
+          <div key={step} className="flex gap-4 p-4 bg-slate-900/30 border border-slate-800 rounded-xl">
+            <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold text-sm">{step}</span>
             <div>
-              <p className="text-white font-semibold text-sm mb-0.5 m-0">{title}</p>
-              <p className="text-gray-500 text-xs m-0 leading-relaxed">{desc}</p>
+              <h4 className="text-white font-semibold text-sm mb-1">{title}</h4>
+              <p className="text-gray-400 text-sm leading-relaxed">{desc}</p>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-5 mb-8 flex gap-3">
-        <div className="text-amber-400 flex-shrink-0 mt-0.5">📄</div>
-        <div>
-          <h4 className="text-amber-400 font-semibold mb-1 text-sm">After shipping with a custom domain</h4>
-          <p className="text-amber-200/60 text-sm m-0">
-            A <code className="text-amber-300">dns.md</code> file is generated locally in your project root containing comprehensive, <strong>step-by-step UI directions</strong> for your specific provider. Once you add those records and they propagate, run <code className="text-amber-300">nextdeploy ship</code> again to finalize the deployment!
-          </p>
-        </div>
-      </div>
-
-      <h3 className="text-xl font-semibold text-white mt-8 mb-3 flex items-center gap-2">
-        <Shield className="w-5 h-5 text-emerald-400" /> AWS Deployer Permissions
-      </h3>
-      <p className="text-gray-400 text-sm mb-4">
-        To deploy successfully, your AWS IAM User (e.g., <code>CONTEXTAPI</code>) requires specific permissions to orchestrate Lambda, S3, CloudFront, ACM, and Secrets Manager. We recommend attaching the following minimal JSON policy rather than granting full AdministratorAccess:
-      </p>
-
-      <div className="mb-8 max-h-96 overflow-y-auto rounded-xl border border-slate-800 bg-slate-900/50 scrollbar-thin scrollbar-thumb-slate-700">
-        <CodeBlock
-          code={`{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "LambdaDeployAndManage",
-            "Effect": "Allow",
-            "Action": [
-                "lambda:CreateFunction", "lambda:UpdateFunctionCode",
-                "lambda:UpdateFunctionConfiguration", "lambda:GetFunction",
-                "lambda:GetFunctionConfiguration", "lambda:GetPolicy",
-                "lambda:AddPermission", "lambda:RemovePermission",
-                "lambda:PublishVersion", "lambda:CreateFunctionUrlConfig",
-                "lambda:GetFunctionUrlConfig", "lambda:UpdateFunctionUrlConfig",
-                "lambda:ListTags", "lambda:DeleteFunction"
-            ],
-            "Resource": "arn:aws:lambda:*:*:function:*-*"
-        },
-        {
-            "Sid": "LambdaLayerAccess",
-            "Effect": "Allow",
-            "Action": ["lambda:GetLayerVersion"],
-            "Resource": "arn:aws:lambda:*:177933130628:layer:AWS-Parameters-and-Secrets-Lambda-Extension:*"
-        },
-        {
-            "Sid": "S3AssetManagement",
-            "Effect": "Allow",
-            "Action": [
-                "s3:CreateBucket", "s3:PutBucketPolicy", "s3:GetBucketPolicy",
-                "s3:PutBucketPublicAccessBlock", "s3:ListBucket",
-                "s3:PutObject", "s3:GetObject", "s3:DeleteObject"
-            ],
-            "Resource": ["arn:aws:s3:::nextdeploy-*", "arn:aws:s3:::nextdeploy-*/*"]
-        },
-        {
-            "Sid": "CloudFrontManagement",
-            "Effect": "Allow",
-            "Action": [
-                "cloudfront:CreateDistribution", "cloudfront:GetDistribution",
-                "cloudfront:GetDistributionConfig", "cloudfront:UpdateDistribution",
-                "cloudfront:CreateInvalidation", "cloudfront:ListDistributions"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "ACMCertificateManagement",
-            "Effect": "Allow",
-            "Action": ["acm:RequestCertificate", "acm:ListCertificates", "acm:DescribeCertificate"],
-            "Resource": "*"
-        },
-        {
-            "Sid": "SecretsManagement",
-            "Effect": "Allow",
-            "Action": [
-                "secretsmanager:CreateSecret", "secretsmanager:PutSecretValue",
-                "secretsmanager:UpdateSecret", "secretsmanager:DescribeSecret",
-                "secretsmanager:GetSecretValue"
-            ],
-            "Resource": "arn:aws:secretsmanager:*:*:secret:nextdeploy/*"
-        },
-        {
-            "Sid": "IAMRoleProvisioning",
-            "Effect": "Allow",
-            "Action": [
-                "iam:CreateRole", "iam:GetRole", "iam:PassRole",
-                "iam:AttachRolePolicy", "iam:PutRolePolicy"
-            ],
-            "Resource": "arn:aws:iam::*:role/nextdeploy-serverless-role"
-        }
-    ]
-}`}
-          className="m-0 border-0 bg-transparent!"
-        />
-      </div>
-
-      <h3 className="text-xl font-semibold text-white mt-8 mb-3">Cloud Rollback</h3>
-      <CodeBlock code="nextdeploy rollback" className="mb-4" />
-      <p className="text-gray-400 text-sm mb-8">
-        NextDeploy versions your Lambda function automatically. Rollback instantly restores the previous version and invalidates the CDN — no manual AWS console needed.
-      </p>
-
       <hr className="border-slate-800 my-10" />
 
-      {/* ─── SECRETS ─── */}
-      <div className="flex items-center gap-3 mb-2">
-        <div className="p-2 rounded-xl bg-rose-500/10 border border-rose-500/20">
-          <Key className="w-6 h-6 text-rose-400" />
-        </div>
-        <h2 className="text-3xl font-bold text-white m-0">Secrets Management</h2>
-      </div>
-      <p className="text-gray-400 mb-6 text-base">
-        One CLI. Knows where you are deploying. Sends secrets to the right place automatically.
-      </p>
+      {/* ─── SECRET MANAGEMENT ─── */}
+      <h2 className="text-3xl font-bold text-white mb-2">Secret Management</h2>
+      <p className="text-gray-400 mb-6 text-sm">Encrypted at rest locally. Never packed into deployment artifacts.</p>
 
-      <div className="grid sm:grid-cols-2 gap-4 mb-8">
-        <div className="p-5 bg-slate-900/40 border border-slate-800 rounded-xl">
-          <div className="flex items-center gap-2 mb-3">
-            <Server className="w-4 h-4 text-blue-400" />
-            <span className="text-white font-semibold text-sm">VPS Target</span>
-          </div>
-          <p className="text-gray-400 text-sm m-0 leading-relaxed">
-            Secrets are stored encrypted on-disk on the VPS (<code className="bg-slate-800 text-blue-300 px-1 rounded text-xs">/opt/nextdeploy/secrets/</code> with <code className="bg-slate-800 text-blue-300 px-1 rounded text-xs">0600</code> permissions). On each deploy, the Daemon injects them as environment variables and hot-reloads the service without downtime.
-          </p>
-        </div>
-        <div className="p-5 bg-slate-900/40 border border-slate-800 rounded-xl">
-          <div className="flex items-center gap-2 mb-3">
-            <Cloud className="w-4 h-4 text-purple-400" />
-            <span className="text-white font-semibold text-sm">Serverless Target</span>
-          </div>
-          <p className="text-gray-400 text-sm m-0 leading-relaxed">
-            Secrets are stored in <strong className="text-gray-200">AWS Secrets Manager</strong> under <code className="bg-slate-800 text-purple-300 px-1 rounded text-xs">nextdeploy/apps/&lt;name&gt;/production</code>. Lambda fetches them at cold-start via the AWS Secrets Extension — available as plain <code className="bg-slate-800 text-purple-300 px-1 rounded text-xs">process.env</code>.
-          </p>
-        </div>
-      </div>
+      <h3 className="text-xl font-semibold text-white mt-8 mb-3">Set a Secret</h3>
+      <CodeBlock code={`nextdeploy secrets set DATABASE_URL "postgres://user:pass@host/db"\nnextdeploy secrets set STRIPE_KEY "sk_live_..."`} className="mb-4" />
 
-      <CodeBlock code={`# Works the same for VPS and Serverless — NextDeploy routes to the right store
-nextdeploy secrets set DATABASE_URL "postgres://user:pass@host/db"
-nextdeploy secrets set STRIPE_KEY "sk_live_..."
-nextdeploy secrets list
-nextdeploy secrets unset OLD_KEY`} className="mb-8" />
+      <h3 className="text-xl font-semibold text-white mt-8 mb-3">List Secrets</h3>
+      <CodeBlock code="nextdeploy secrets list" className="mb-4" />
+
+      <h3 className="text-xl font-semibold text-white mt-8 mb-3">Delete a Secret</h3>
+      <CodeBlock code="nextdeploy secrets delete DATABASE_URL" className="mb-8" />
+
+      <div className="bg-slate-900/50 border border-slate-700 rounded-xl p-6 mb-8">
+        <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
+          <Lock className="w-4 h-4 text-purple-400" /> How Secrets Are Stored
+        </h4>
+        <ul className="space-y-2 text-sm text-gray-400 list-none p-0 m-0">
+          <li>• <strong className="text-gray-200">VPS deployments:</strong> Secrets are decrypted and injected as environment variables into the process environment at startup. The key is derived per-machine.</li>
+          <li>• <strong className="text-gray-200">Serverless deployments:</strong> Secrets are pushed to <strong>AWS Secrets Manager</strong> under <code className="text-emerald-400">nextdeploy/apps/&lt;name&gt;/production</code>. Only <code className="text-emerald-400">ND_SECRETS_ARN</code> is set in Lambda — your app fetches the actual values via IAM at runtime.</li>
+          <li>• Raw values are <strong>never written to disk</strong> unencrypted and <strong>never packed into tarballs</strong>.</li>
+        </ul>
+      </div>
 
       <hr className="border-slate-800 my-10" />
 
       {/* ─── CLI REFERENCE ─── */}
-      <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-2">
-        <Terminal className="w-6 h-6 text-emerald-400" /> CLI Reference
-      </h2>
-      <div className="space-y-2 mb-8">
+      <h2 className="text-3xl font-bold text-white mb-6">CLI Reference</h2>
+      <div className="space-y-4 mb-8">
         {[
-          { cmd: "nextdeploy init", desc: "Scaffold nextdeploy.yml in your project" },
-          { cmd: "nextdeploy build", desc: "Build Next.js standalone + create app.tar.gz artifact" },
-          { cmd: "nextdeploy build --force", desc: "Force a clean rebuild from scratch" },
-          { cmd: "nextdeploy ship", desc: "Deploy to configured target (VPS or AWS Serverless)" },
-          { cmd: "nextdeploy prepare", desc: "Provision a VPS — installs Caddy, Daemon, Fail2Ban (VPS only)" },
-          { cmd: "nextdeploy rollback", desc: "Revert to the previous release (VPS + Serverless)" },
-          { cmd: "nextdeploy status", desc: "Show health, active release, and resource usage" },
+          { cmd: "nextdeploy init", desc: "Initialize a project and create nextdeploy.yml" },
+          { cmd: "nextdeploy build", desc: "Build the Next.js app and create .nextdeploy/app.tar.gz" },
+          { cmd: "nextdeploy build --force", desc: "Force a full rebuild, ignoring existing artifacts" },
+          { cmd: "nextdeploy ship", desc: "Deploy to configured target (VPS or Serverless)" },
+          { cmd: "nextdeploy prepare", desc: "Provision a fresh VPS with all dependencies (VPS only)" },
+          { cmd: "nextdeploy rollback", desc: "Roll back to the previous release (VPS only)" },
+          { cmd: "nextdeploy status", desc: "Show app health, active release, and resource usage" },
           { cmd: "nextdeploy logs", desc: "Tail live application logs from the remote server" },
-          { cmd: "nextdeploy secrets set KEY VALUE", desc: "Store a secret — routed to Daemon or AWS Secrets Manager" },
-          { cmd: "nextdeploy secrets get KEY", desc: "Read a secret value" },
-          { cmd: "nextdeploy secrets list", desc: "List all secret names (values always hidden)" },
-          { cmd: "nextdeploy secrets unset KEY", desc: "Permanently remove a secret" },
-          { cmd: "nextdeploy update", desc: "Self-update the CLI to the latest release from GitHub" },
+          { cmd: "nextdeploy secrets set KEY VALUE", desc: "Encrypt and store a secret locally" },
+          { cmd: "nextdeploy secrets list", desc: "List all stored secret names (values hidden)" },
+          { cmd: "nextdeploy secrets delete KEY", desc: "Remove a stored secret" },
+          { cmd: "nextdeploy update", desc: "Self-update the CLI to the latest release" },
         ].map(({ cmd, desc }) => (
-          <div key={cmd} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-0 p-3.5 bg-slate-900/30 border border-slate-800 rounded-xl hover:border-emerald-500/20 transition-colors group">
-            <code className="text-emerald-400 font-mono text-sm flex-shrink-0 sm:w-80 whitespace-nowrap">{cmd}</code>
-            <span className="flex items-center gap-2 text-gray-400 text-sm">
-              <ArrowRight className="w-3.5 h-3.5 text-slate-600 hidden sm:block" />
-              {desc}
-            </span>
+          <div key={cmd} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 p-4 bg-slate-900/30 border border-slate-800 rounded-xl">
+            <code className="text-emerald-400 font-mono text-sm flex-shrink-0 whitespace-nowrap">{cmd}</code>
+            <span className="text-gray-400 text-sm">{desc}</span>
           </div>
         ))}
       </div>
@@ -447,67 +273,60 @@ nextdeploy secrets unset OLD_KEY`} className="mb-8" />
       <hr className="border-slate-800 my-10" />
 
       {/* ─── CONFIG REFERENCE ─── */}
-      <h2 className="text-3xl font-bold text-white mb-6">Configuration Reference</h2>
-      <p className="text-gray-400 mb-6">Everything lives in <code className="bg-slate-900 px-2 py-1 rounded text-emerald-400 font-mono">nextdeploy.yml</code>. Run <code className="bg-slate-900 px-2 py-1 rounded text-emerald-400 font-mono">nextdeploy init</code> to generate it.</p>
+      <h2 className="text-3xl font-bold text-white mb-6">Configuration Reference (nextdeploy.yml)</h2>
 
-      <Tabs defaultValue="vps" className="w-full mb-10">
-        <TabsList className="bg-slate-900 border border-slate-700">
-          <TabsTrigger value="vps">VPS Config</TabsTrigger>
-          <TabsTrigger value="serverless">Serverless Config</TabsTrigger>
-        </TabsList>
-        <TabsContent value="vps" className="mt-2">
-          <CodeBlock
-            code={`version: "1.0"
-target_type: vps            # "vps" or "serverless"
+      <h3 className="text-xl font-semibold text-white mt-8 mb-3">Full VPS Config</h3>
+      <CodeBlock
+        code={`version: "1.0"
+target_type: vps            # "vps" | "serverless"
 
 app:
-  name: my-app              # Used for process naming and secret namespacing
-  domain: app.example.com   # Caddy configures HTTPS automatically
-  port: 3000
-  environment: production
+  name: my-next-app         # Unique identifier for this app
+  domain: app.example.com   # Public domain (Caddy configures HTTPS automatically)
+  port: 3000                # Internal port your Next.js server listens on
+  environment: production   # "development" | "staging" | "production"
 
 servers:
-  - name: prod
-    host: 1.2.3.4
+  - name: production-01
+    host: 192.168.1.100
     port: 22
     username: deploy
     ssh_key: ~/.ssh/id_rsa
 
 secrets:
-  provider: local           # "local" supported now | "doppler" coming soon
+  provider: local           # "local" | "doppler" (coming soon)
 
 logging:
   enabled: true`}
-          />
-        </TabsContent>
-        <TabsContent value="serverless" className="mt-2">
-          <CodeBlock
-            code={`version: "1.0"
+        className="mb-8"
+      />
+
+      <h3 className="text-xl font-semibold text-white mt-8 mb-3">Full Serverless Config</h3>
+      <CodeBlock
+        code={`version: "1.0"
 target_type: serverless
 
 app:
-  name: my-app
-  domain: my-app.com        # Custom domain with auto SSL + dns.txt guide
+  name: my-next-app
+  domain: app.example.com
+  port: 3000
 
 serverless:
-  provider: aws             # "aws" | "cloudflare" / "gcp" / "azure" coming soon
-  region: us-east-1         # Must be us-east-1 for CloudFront ACM certs
-  s3_bucket: my-app-static  # Bucket for public/ and _next/static/
-  cloudfront_id: EXXXX      # Distribution ID (optional — created if omitted)
-  lambda_function_name: my-app-handler  # Defaults to app.name`}
-          />
-        </TabsContent>
-      </Tabs>
+  provider: aws                                  # Currently: "aws"  |  Coming: "cloudflare", "gcp", "azure"
+  region: us-east-1                              # AWS region
+  s3_bucket: my-nextjs-static-assets             # S3 bucket for public/ and _next/static/
+  cloudfront_id: EXXXXXXXXXXXXXXXXX              # CloudFront distribution (optional but recommended)
+  lambda_function_name: my-next-app-handler      # Lambda function name (defaults to app.name)`}
+        className="mb-8"
+      />
 
       <hr className="border-slate-800 my-10" />
 
       {/* ─── ARCHITECTURE ─── */}
-      <h2 className="text-3xl font-bold text-white mb-8">Architecture</h2>
+      <h2 className="text-3xl font-bold text-white mb-6">Technical Architecture</h2>
 
-      <h3 className="text-xl font-semibold text-white mt-8 mb-4 flex items-center gap-2">
-        <Server className="w-5 h-5 text-blue-400" /> VPS Architecture
-      </h3>
-      <div className="my-6 p-6 bg-slate-900/50 border border-slate-800 rounded-2xl flex flex-col items-center overflow-x-auto">
+      <h3 className="text-xl font-semibold text-white mt-8 mb-4">VPS Architecture</h3>
+      <div className="my-8 p-6 bg-slate-900/50 border border-slate-800 rounded-2xl flex flex-col items-center overflow-x-auto">
         <svg viewBox="0 0 800 320" className="w-full min-w-[600px] max-w-3xl">
           <defs>
             <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orientation="auto">
@@ -517,12 +336,15 @@ serverless:
               <polygon points="0 0, 6 2, 0 4" fill="#94a3b8" />
             </marker>
           </defs>
+          {/* Local Environment */}
           <rect x="30" y="80" width="170" height="160" rx="12" fill="none" stroke="#334155" strokeWidth="2" strokeDasharray="4 4" />
           <text x="115" y="65" textAnchor="middle" fill="#94a3b8" fontSize="12" fontWeight="600">Local Machine</text>
           <rect x="50" y="110" width="130" height="60" rx="8" fill="#064e3b" stroke="#10b981" strokeWidth="2" />
           <text x="115" y="145" textAnchor="middle" fill="#ecfdf5" fontSize="14" fontWeight="600">nextdeploy CLI</text>
+          {/* Arrow */}
           <path d="M 200 150 L 310 150" stroke="#10b981" strokeWidth="2" markerEnd="url(#arrowhead)" />
           <text x="255" y="140" textAnchor="middle" fill="#10b981" fontSize="11" fontWeight="600">SFTP</text>
+          {/* Production VPS */}
           <rect x="310" y="40" width="440" height="240" rx="12" fill="none" stroke="#334155" strokeWidth="2" strokeDasharray="4 4" />
           <text x="530" y="25" textAnchor="middle" fill="#94a3b8" fontSize="12" fontWeight="600">Production VPS (Caddy + Fail2Ban)</text>
           <rect x="330" y="110" width="100" height="60" rx="8" fill="#1e293b" stroke="#3b82f6" strokeWidth="2" />
@@ -542,10 +364,8 @@ serverless:
         </svg>
       </div>
 
-      <h3 className="text-xl font-semibold text-white mt-10 mb-4 flex items-center gap-2">
-        <Cloud className="w-5 h-5 text-purple-400" /> Serverless Architecture
-      </h3>
-      <div className="my-6 p-6 bg-slate-900/50 border border-slate-800 rounded-2xl flex flex-col items-center overflow-x-auto">
+      <h3 className="text-xl font-semibold text-white mt-8 mb-4">Serverless Architecture</h3>
+      <div className="my-8 p-6 bg-slate-900/50 border border-slate-800 rounded-2xl flex flex-col items-center overflow-x-auto">
         <svg viewBox="0 0 800 280" className="w-full min-w-[600px] max-w-3xl">
           <defs>
             <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orientation="auto">
@@ -558,87 +378,116 @@ serverless:
           <text x="115" y="30" textAnchor="middle" fill="#94a3b8" fontSize="12" fontWeight="600">Local</text>
           <rect x="30" y="80" width="170" height="60" rx="8" fill="#064e3b" stroke="#10b981" strokeWidth="2" />
           <text x="115" y="115" textAnchor="middle" fill="#ecfdf5" fontSize="14" fontWeight="600">nextdeploy CLI</text>
+
           <path d="M 200 110 L 280 110" stroke="#10b981" strokeWidth="2" markerEnd="url(#arrow-green)" />
           <text x="240" y="100" textAnchor="middle" fill="#10b981" fontSize="10">Deploy</text>
+
           <text x="530" y="20" textAnchor="middle" fill="#94a3b8" fontSize="12" fontWeight="600">AWS Cloud</text>
           <rect x="240" y="40" width="540" height="220" rx="12" fill="none" stroke="#334155" strokeWidth="2" strokeDasharray="4 4" />
+
           <rect x="280" y="80" width="100" height="60" rx="8" fill="#1e293b" stroke="#f59e0b" strokeWidth="2" />
           <text x="330" y="115" textAnchor="middle" fill="#f1f5f9" fontSize="13" fontWeight="600">Lambda</text>
+
           <rect x="430" y="80" width="100" height="60" rx="8" fill="#1e293b" stroke="#3b82f6" strokeWidth="2" />
           <text x="480" y="115" textAnchor="middle" fill="#f1f5f9" fontSize="13" fontWeight="600">S3</text>
+
           <rect x="580" y="80" width="120" height="60" rx="8" fill="#1e293b" stroke="#8b5cf6" strokeWidth="2" />
           <text x="640" y="115" textAnchor="middle" fill="#f1f5f9" fontSize="13" fontWeight="600">CloudFront</text>
+
           <rect x="350" y="190" width="160" height="50" rx="8" fill="#1e293b" stroke="#ef4444" strokeWidth="2" />
           <text x="430" y="220" textAnchor="middle" fill="#f1f5f9" fontSize="13" fontWeight="600">Secrets Manager</text>
+
           <path d="M 330 140 L 330 190" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="2 2" markerEnd="url(#arrow-gray-sl)" />
-          <text x="338" y="170" fill="#94a3b8" fontSize="10">Fetch at cold-start</text>
+          <text x="338" y="170" fill="#94a3b8" fontSize="10">Fetch Secrets</text>
+
           <path d="M 640 140 L 640 200 L 530 215" stroke="#8b5cf6" strokeWidth="1.5" strokeDasharray="2 2" markerEnd="url(#arrow-gray-sl)" />
           <path d="M 580 110 L 530 110" stroke="#8b5cf6" strokeWidth="1.5" strokeDasharray="2 2" />
         </svg>
       </div>
 
+      <h3 className="text-2xl font-bold text-white mt-12 mb-4">The Lifecycle of a VPS Deployment</h3>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {[
+          { icon: Terminal, title: "Local Build", desc: "The CLI runs your build command natively, producing a standalone Next.js output." },
+          { icon: Zap, title: "Packaging", desc: "A production artifact (app.tar.gz) is bundled with server code, static assets, and deployment metadata." },
+          { icon: Share2, title: "Secure Transport", desc: "The payload is transmitted to your VPS via encrypted SFTP." },
+          { icon: Shield, title: "Production Hardening", desc: "Fail2Ban, DDoS rate limits, CSP, and HSTS headers are automatically applied by Caddy." },
+          { icon: RefreshCw, title: "Atomic Swap", desc: "A fresh port is allocated, health-checked, then traffic is atomically swapped with zero downtime." },
+          { icon: FileText, title: "Structured Logs", desc: "JSON access logs are recorded for traffic analysis, auditing, and incident response." },
+        ].map((step, i) => (
+          <div key={i} className="flex flex-col gap-3 p-5 bg-slate-900/30 border border-slate-800 rounded-xl hover:border-emerald-500/30 transition-colors">
+            <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+              <step.icon className="w-6 h-6 text-emerald-400" />
+            </div>
+            <div>
+              <h4 className="text-white font-semibold mb-1 text-base">{step.title}</h4>
+              <p className="text-gray-400 text-sm leading-relaxed">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <hr className="border-slate-800 my-10" />
 
       {/* ─── COMPONENT OVERVIEW ─── */}
-      <h2 className="text-3xl font-bold text-white mb-6">Under the Hood</h2>
-      <div className="grid md:grid-cols-3 gap-5 my-6 mb-10">
-        <div className="p-6 bg-slate-900/40 border border-slate-800 rounded-2xl hover:border-emerald-500/20 transition-colors">
-          <Terminal className="w-5 h-5 text-emerald-400 mb-3" />
-          <h3 className="text-base font-bold text-white mb-3 m-0">The CLI</h3>
-          <ul className="space-y-2 text-sm text-gray-400 list-none p-0 m-0">
-            <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">▸</span> Next.js config analysis via Bun/Node eval</li>
-            <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">▸</span> Build, package &amp; artifact management</li>
-            <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">▸</span> Unified secret CLI for VPS + Cloud</li>
-            <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">▸</span> SFTP transport (VPS) or AWS SDK (serverless)</li>
-            <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">▸</span> Self-update via GitHub Releases API</li>
+      <h2 className="text-3xl font-bold text-white mb-6">Component Overview</h2>
+      <div className="grid md:grid-cols-3 gap-6 my-8">
+        <div className="p-6 bg-slate-900/40 border border-slate-800 rounded-2xl">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2 m-0 font-sans">
+            <Terminal className="w-5 h-5 text-emerald-400" /> The CLI
+          </h3>
+          <ul className="space-y-2 text-sm text-gray-400 list-none p-0">
+            <li>• Next.js config analysis (Bun/Node eval)</li>
+            <li>• Build, package &amp; artifact management</li>
+            <li>• Encrypted local secret storage</li>
+            <li>• SFTP transport (VPS) or AWS SDK (serverless)</li>
+            <li>• Self-update via GitHub Releases API</li>
           </ul>
         </div>
 
-        <div className="p-6 bg-slate-900/40 border border-slate-800 rounded-2xl hover:border-blue-500/20 transition-colors">
-          <Server className="w-5 h-5 text-blue-400 mb-3" />
-          <h3 className="text-base font-bold text-white mb-3 m-0">The Daemon (VPS)</h3>
-          <ul className="space-y-2 text-sm text-gray-400 list-none p-0 m-0">
-            <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">▸</span> Systemd service supervision</li>
-            <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">▸</span> Unix socket control plane (no HTTP overhead)</li>
-            <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">▸</span> Health check &amp; port arbitration</li>
-            <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">▸</span> Atomic hot-swap with instant rollback</li>
-            <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">▸</span> Release ring buffer — keeps last 5 builds</li>
+        <div className="p-6 bg-slate-900/40 border border-slate-800 rounded-2xl">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2 m-0 font-sans">
+            <Server className="w-5 h-5 text-blue-400" /> The Daemon (VPS)
+          </h3>
+          <ul className="space-y-2 text-sm text-gray-400 list-none p-0">
+            <li>• Systemd service supervision</li>
+            <li>• Unix socket control plane</li>
+            <li>• Health check &amp; port arbitration</li>
+            <li>• Atomic hot-swap with rollback</li>
+            <li>• Release pruning (keeps last 5)</li>
           </ul>
         </div>
 
-        <div className="p-6 bg-slate-900/40 border border-purple-500/20 rounded-2xl shadow-lg shadow-purple-500/5 hover:border-purple-500/30 transition-colors">
-          <Cloud className="w-5 h-5 text-purple-400 mb-3" />
-          <h3 className="text-base font-bold text-white mb-3 m-0">Serverless Engine</h3>
-          <ul className="space-y-2 text-sm text-gray-400 list-none p-0 m-0">
-            <li className="flex items-start gap-2"><span className="text-purple-500 mt-0.5">▸</span> S3 upload with MIME + cache-control headers</li>
-            <li className="flex items-start gap-2"><span className="text-purple-500 mt-0.5">▸</span> Lambda zip deploy + version management</li>
-            <li className="flex items-start gap-2"><span className="text-purple-500 mt-0.5">▸</span> CloudFront OAC + Lambda URL auth</li>
-            <li className="flex items-start gap-2"><span className="text-purple-500 mt-0.5">▸</span> ACM cert + dns.txt domain workflow</li>
-            <li className="flex items-start gap-2"><span className="text-purple-500 mt-0.5">▸</span> Provider interface — GCP, Cloudflare planned</li>
+        <div className="p-6 bg-slate-900/40 border border-slate-800 rounded-2xl border-purple-500/20 shadow-lg shadow-purple-500/5">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2 m-0 font-sans">
+            <Cloud className="w-5 h-5 text-purple-400" /> Serverless Engine
+          </h3>
+          <ul className="space-y-2 text-sm text-gray-400 list-none p-0">
+            <li>• S3 upload with MIME + cache headers</li>
+            <li>• Lambda code deployment (zip upload)</li>
+            <li>• AWS Secrets Manager integration</li>
+            <li>• CloudFront cache invalidation</li>
+            <li>• Extensible Provider interface (GCP, Cloudflare planned)</li>
           </ul>
         </div>
       </div>
 
       <hr className="border-slate-800 my-10" />
 
-      {/* ─── ROADMAP ─── */}
-      <h2 className="text-3xl font-bold text-white mb-2">Roadmap</h2>
-      <p className="text-gray-400 mb-6">NextDeploy is growing fast. Here&apos;s what&apos;s live and what&apos;s coming next.</p>
-      <div className="grid md:grid-cols-2 gap-3 mb-8">
+      {/* ─── FUTURE PROVIDERS ─── */}
+      <h2 className="text-3xl font-bold text-white mb-4">Roadmap</h2>
+      <div className="grid md:grid-cols-2 gap-4 mb-8">
         {[
-          { label: "AWS — Lambda + S3 + CloudFront + ACM + Secrets Manager", status: "✅ Live", color: "border-emerald-500/20 bg-emerald-500/5" },
-          { label: "Custom domains with automated SSL and dns.txt guide", status: "✅ Live", color: "border-emerald-500/20 bg-emerald-500/5" },
-          { label: "Unified secret CLI for VPS + Serverless", status: "✅ Live", color: "border-emerald-500/20 bg-emerald-500/5" },
-          { label: "Serverless rollback via Lambda versions", status: "✅ Live", color: "border-emerald-500/20 bg-emerald-500/5" },
-          { label: "Cloudflare Workers + R2 + CDN provider", status: "🔜 Coming soon", color: "border-slate-700 bg-slate-900/30" },
-          { label: "GCP Cloud Run + GCS provider", status: "🔜 Coming soon", color: "border-slate-700 bg-slate-900/30" },
-          { label: "Azure Functions + Blob Storage provider", status: "🔜 Coming soon", color: "border-slate-700 bg-slate-900/30" },
-          { label: "Doppler / 1Password secret provider integration", status: "🔜 Coming soon", color: "border-slate-700 bg-slate-900/30" },
-          { label: "Deployment dashboard UI", status: "🔜 Coming soon", color: "border-slate-700 bg-slate-900/30" },
-        ].map(({ label, status, color }) => (
-          <div key={label} className={`flex justify-between items-center p-4 border rounded-xl ${color}`}>
+          { label: "✅ AWS (Lambda + S3 + CloudFront)", status: "Available in v0.1.60" },
+          { label: "🔜 Cloudflare Workers + R2 + CDN", status: "Coming soon" },
+          { label: "🔜 GCP Cloud Run + GCS", status: "Coming soon" },
+          { label: "🔜 Azure Functions + Blob Storage", status: "Coming soon" },
+          { label: "🔜 Doppler Secret Provider", status: "Coming soon" },
+          { label: "🔜 Deployment Dashboard UI", status: "Coming soon" },
+        ].map(({ label, status }) => (
+          <div key={label} className="flex justify-between items-center p-4 bg-slate-900/30 border border-slate-800 rounded-xl">
             <span className="text-gray-300 text-sm">{label}</span>
-            <span className="text-xs ml-4 whitespace-nowrap text-gray-400">{status}</span>
+            <span className="text-gray-500 text-xs">{status}</span>
           </div>
         ))}
       </div>
