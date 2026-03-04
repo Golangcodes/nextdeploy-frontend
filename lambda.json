@@ -1,8 +1,0 @@
-{
-    "FunctionUrl": "https://vyv3cranh2cxir75h3xdpl3sdy0uxjmh.lambda-url.us-east-1.on.aws/",
-    "FunctionArn": "arn:aws:lambda:us-east-1:044260498664:function:nextdeploy-frontend-production",
-    "AuthType": "AWS_IAM",
-    "CreationTime": "2026-03-04T02:06:09.467170170Z",
-    "LastModifiedTime": "2026-03-04T02:24:04.468774841Z",
-    "InvokeMode": "BUFFERED"
-}

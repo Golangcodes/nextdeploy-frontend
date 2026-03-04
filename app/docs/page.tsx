@@ -155,14 +155,19 @@ servers:
       <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mb-8 flex gap-3">
         <div className="text-blue-400 mt-0.5">ℹ️</div>
         <div>
-          <h4 className="text-blue-400 font-semibold mb-1">Prerequisites</h4>
-          <ul className="text-blue-200/70 text-sm space-y-1 list-none p-0 m-0">
-            <li>• AWS CLI credentials configured (<code>~/.aws/credentials</code> or environment variables)</li>
-            <li>• An S3 bucket for static assets</li>
-            <li>• A Lambda function created (NextDeploy updates the code — it does not create the function)</li>
-            <li>• A CloudFront distribution pointed at your S3 bucket + Lambda URL (optional but recommended)</li>
-            <li>• <code>output: &apos;standalone&apos;</code> set in your <code>next.config.mjs</code></li>
+          <h4 className="text-blue-400 font-semibold mb-1">What NextDeploy Automates For You</h4>
+          <p className="text-blue-200/70 text-sm mb-2">
+            No need to create AWS resources manually! On your first <code className="text-blue-300 bg-blue-900/50 px-1 rounded">nextdeploy ship</code>, the engine will automatically:
+          </p>
+          <ul className="text-blue-200/80 text-sm space-y-1 list-none p-0 m-0">
+            <li>• ✅ Provision an S3 bucket for your static assets</li>
+            <li>• ✅ Create the Lambda function and IAM execution role</li>
+            <li>• ✅ Request an ACM Certificate for your custom domain</li>
+            <li>• ✅ Hook up a CloudFront distribution bridging S3 and Lambda securely</li>
           </ul>
+          <p className="text-blue-200/70 text-xs mt-3">
+            <em>Prerequisite: You just need valid AWS Credentials configured locally (e.g., <code>~/.aws/credentials</code>) with permissions outlined in the AWS Deployer Permissions section below.</em>
+          </p>
         </div>
       </div>
 
@@ -192,8 +197,17 @@ const nextConfig = {
   output: 'standalone',
 }
 export default nextConfig`}
-        className="mb-8"
+        className="mb-4"
       />
+
+      <div className="bg-slate-900/50 border border-slate-700 rounded-xl p-5 mb-8">
+        <h4 className="text-white font-semibold mb-2">Why is standalone required for Serverless?</h4>
+        <p className="text-gray-400 text-sm leading-relaxed m-0">
+          Default Next.js builds rely heavily on your local <code>node_modules</code> folder, making the output way too massive (frequently 500MB+) to fit inside AWS Lambda's strict 250MB size limit.
+          <br /><br />
+          The <code>standalone</code> mode traces your code to find only the exact dependencies being used, creating a highly-compressed, completely independent <code>server.js</code> file. This allows NextDeploy to trivially zip it up into a tiny lightweight artifact and natively deploy it directly into the AWS Lambda runtime!
+        </p>
+      </div>
 
       <h3 className="text-xl font-semibold text-white mt-8 mb-3">3. Build &amp; Ship</h3>
       <CodeBlock code={`nextdeploy build\nnextdeploy ship`} className="mb-4" />
