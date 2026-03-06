@@ -20,21 +20,25 @@ if "%LATEST_TAG%"=="" (
 
 echo Latest Version: %LATEST_TAG%
 
-set "ARCHIVE_URL_CAP=https://github.com/%REPO%/releases/download/%LATEST_TAG%/nextdeploy_Windows_x86_64.zip"
-set "TMP_ZIP=%TEMP%\nextdeploy_%LATEST_TAG%.zip"
+:: Strip leading 'v' from tag for archive naming (e.g. v0.6.2 -> 0.6.2)
+set "CLEAN_VERSION=%LATEST_TAG:~1%"
 
-echo Downloading NextDeploy from %ARCHIVE_URL_CAP%...
-powershell -Command "Invoke-WebRequest -Uri '%ARCHIVE_URL_CAP%' -OutFile '%TMP_ZIP%'"
+:: GoReleaser archive name: nextdeploy_VERSION_Windows_amd64.zip
+set "ARCHIVE_NAME=nextdeploy_%CLEAN_VERSION%_Windows_amd64.zip"
+set "ARCHIVE_URL=https://github.com/%REPO%/releases/download/%LATEST_TAG%/%ARCHIVE_NAME%"
+set "TMP_ZIP=%TEMP%\%ARCHIVE_NAME%"
+
+echo Downloading %ARCHIVE_NAME%...
+powershell -Command "Invoke-WebRequest -Uri '%ARCHIVE_URL%' -OutFile '%TMP_ZIP%'"
 
 if not exist "%TMP_ZIP%" (
-    echo Archive failed to download. Trying raw executable...
-    set "BINARY_URL=https://github.com/%REPO%/releases/download/%LATEST_TAG%/%BIN_NAME%-%LATEST_TAG%-windows-amd64.exe"
-    powershell -Command "Invoke-WebRequest -Uri '%BINARY_URL%' -OutFile '%INSTALL_DIR%\%BIN_NAME%'"
-) else (
-    echo Extracting...
-    powershell -Command "Expand-Archive -Path '%TMP_ZIP%' -DestinationPath '%INSTALL_DIR%' -Force"
-    del "%TMP_ZIP%"
+    echo Error: Download failed. Could not download %ARCHIVE_NAME%.
+    exit /b 1
 )
+
+echo Extracting...
+powershell -Command "Expand-Archive -Path '%TMP_ZIP%' -DestinationPath '%INSTALL_DIR%' -Force"
+del "%TMP_ZIP%"
 
 if exist "%INSTALL_DIR%\%BIN_NAME%" (
     echo ===========================================
@@ -47,6 +51,6 @@ if exist "%INSTALL_DIR%\%BIN_NAME%" (
     echo Please restart your terminal to use 'nextdeploy'.
     echo ===========================================
 ) else (
-    echo [ERROR] Installation failed. Could not find downloaded executable.
+    echo [ERROR] Installation failed. Could not find extracted executable.
     exit /b 1
 )
